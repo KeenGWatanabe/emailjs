@@ -5,7 +5,7 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
   <script>
     (function() {
-      emailjs.init("sNv6nC_yS6LzTDbIY"); // Initialize EmailJS
+      emailjs.init("sNv6nC_yS6LzTDbIY"); // Initialize EmailJS acct api
     })();
 
     function scheduleEmail() {
@@ -18,7 +18,7 @@
       const now = new Date();
       const scheduledTime = new Date(now.getTime() + delayMinutes * 60000);
 
-      // Schedule email
+      // Schedule email from emailJS serviceID and templateID
       setTimeout(() => {
         emailjs.send("service_c4i7t9i", "template_bl16b0t", {
           to_email: email,
