@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Scheduler</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("sNv6nC_yS6LzTDbIY"); // Initialize EmailJS
+    })();
+
+    function scheduleEmail() {
+      const email = document.getElementById("email").value;
+      const subject = document.getElementById("subject").value;
+      const message = document.getElementById("message").value;
+      const delayMinutes = document.getElementById("delay").value;
+
+      // Calculate future time
+      const now = new Date();
+      const scheduledTime = new Date(now.getTime() + delayMinutes * 60000);
+
+      // Schedule email
+      setTimeout(() => {
+        emailjs.send("service_c4i7t9i", "template_bl16b0t", {
+          to_email: email,
+          subject: subject,
+          message: message
+        })
+        .then(() => alert("Email sent!"))
+        .catch(err => alert("Error: " + err));
+      }, delayMinutes * 60000);
+
+      alert(`Email scheduled for ${scheduledTime}`);
+    }
+  </script>
+</head>
+<body>
+  <h1>Email Scheduler</h1>
+  <input type="email" id="email" placeholder="Recipient Email" required><br>
+  <input type="text" id="subject" placeholder="Subject" required><br>
+  <textarea id="message" placeholder="Message" required></textarea><br>
+  <input type="number" id="delay" placeholder="Delay (minutes)" min="1" required><br>
+  <button onclick="scheduleEmail()">Schedule Email</button>
+</body>
+</html>
